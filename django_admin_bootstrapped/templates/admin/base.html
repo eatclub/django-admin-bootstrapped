@@ -15,20 +15,20 @@
     <link href="{% static "bootstrap-rtl/css/bootstrap-flipped.min.css" %}" rel="stylesheet"/>
     {% endif %}
 
-    <script type="text/javascript">
+    <script nonce="{{CSP_NONCE}}" type="text/javascript">
     //<![CDATA[
         window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";
         window.__admin_utc_offset__ = "{% filter escapejs %}{% now "Z" %}{% endfilter %}";
     //]]>
     </script>
-    <script src="{% static "admin/js/jquery-1.9.1.min.js" %}"></script>
-    <script src="{% static "admin/js/jquery-migrate-1.2.1.min.js" %}"></script>
-    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+    <script nonce="{{CSP_NONCE}}" src="{% static "admin/js/jquery-1.9.1.min.js" %}"></script>
+    <script nonce="{{CSP_NONCE}}" src="{% static "admin/js/jquery-migrate-1.2.1.min.js" %}"></script>
+    <script nonce="{{CSP_NONCE}}" src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
 
     {% block extrahead %}{% endblock %}
 
     {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
-    <script type="text/javascript">
+    <script nonce="{{CSP_NONCE}}" type="text/javascript">
     //<![CDATA[
             (function($) {
                 $(document).ready(function() {

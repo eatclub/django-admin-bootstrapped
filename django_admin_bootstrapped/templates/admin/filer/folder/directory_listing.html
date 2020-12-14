@@ -4,13 +4,13 @@
 {% block extrahead %}{{ block.super }}
 {# upload stuff #}
 {{ media.js }}
-<script type="text/javascript" src="{% static "admin/js/jquery.min.js" %}></script>
-<script type="text/javascript" src="{% filer_staticmedia_prefix %}js/jquery.cookie.js"></script>
-<script type="text/javascript" src="{% filer_staticmedia_prefix %}js/fileuploader.js"></script>
-<script type="text/javascript" src="{% admin_js_base %}admin/js/RelatedObjectLookups.js" %}></script>
-<script type="text/javascript" src="{% filer_staticmedia_prefix %}js/popup_handling.js"></script>
+<script nonce="{{CSP_NONCE}}" type="text/javascript" src="{% static "admin/js/jquery.min.js" %}></script>
+<script nonce="{{CSP_NONCE}}" type="text/javascript" src="{% filer_staticmedia_prefix %}js/jquery.cookie.js"></script>
+<script nonce="{{CSP_NONCE}}" type="text/javascript" src="{% filer_staticmedia_prefix %}js/fileuploader.js"></script>
+<script nonce="{{CSP_NONCE}}" type="text/javascript" src="{% admin_js_base %}admin/js/RelatedObjectLookups.js" %}></script>
+<script nonce="{{CSP_NONCE}}" type="text/javascript" src="{% filer_staticmedia_prefix %}js/popup_handling.js"></script>
 {% if action_form %}{% if actions_on_top or actions_on_bottom %}
-<script type="text/javascript">
+<script nonce="{{CSP_NONCE}}" type="text/javascript">
 (function($) {
     $(document).ready(function($) {
         $("tr input.action-select").actions();
@@ -25,19 +25,19 @@
 
 
 {% block extrastyle %}{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% admin_css_base %}changelists.css" />
+<link nonce="{{CSP_NONCE}}" rel="stylesheet" type="text/css" href="{% admin_css_base %}changelists.css" />
 {{ media.css }}
 {% if action_form %}
   {% url 'admin:jsi18n' as jsi18nurl %}
-  <script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
+  <script nonce="{{CSP_NONCE}}" type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
 {% endif %}
 {% if query.pop %}
-<style type="text/css">
+<style nonce="{{CSP_NONCE}}" type="text/css">
     #header { display: none; }
 </style>
 {% endif %}
 {% if not actions_on_top and not actions_on_bottom %}
-<style>
+<style nonce="{{CSP_NONCE}}" type="text/css">
     #changelist table thead th:first-child {width: inherit}
 </style>
 {% endif %}

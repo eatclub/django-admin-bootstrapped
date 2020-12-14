@@ -3,11 +3,11 @@
 
 {% block extrahead %}{{ block.super }}
 {% url 'admin:jsi18n' as jsi18nurl %}
-<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+<script nonce="{{CSP_NONCE}}" type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
 {{ media }}
 {% endblock %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+{% block extrastyle %}{{ block.super }}<link nonce="{{CSP_NONCE}}" rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
 
 {% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
 
@@ -80,7 +80,7 @@
 
         {% block admin_change_form_document_ready %}
 
-        <script type="text/javascript">
+        <script nonce="{{CSP_NONCE}}" type="text/javascript">
             (function($) {
                 $(document).ready(function() {
                     $('.add-another').click(function(e) {

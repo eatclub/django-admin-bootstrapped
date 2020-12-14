@@ -2,7 +2,7 @@
 {% load i18n admin_modify admin_urls %}
 
 {% block extrastyle %}{{ block.super }}
-<style>
+<style nonce="{{CSP_NONCE}}" type="text/css">
   #id_description { width:400px; }
 </style>
 {% endblock %}

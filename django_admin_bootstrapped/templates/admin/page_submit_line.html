@@ -15,7 +15,7 @@
     {% if show_save %}<button type="submit" class="btn btn-primary default" name="_save" {{ onclick_attrib }}>{% trans 'Save' %}</button>{% endif %}
   </div>
 
-<script>
+<script nonce="{{CSP_NONCE}}" type="text/javascript">
 (function ($) {
 	var i = 0;
 	$('form').submit(function () {
