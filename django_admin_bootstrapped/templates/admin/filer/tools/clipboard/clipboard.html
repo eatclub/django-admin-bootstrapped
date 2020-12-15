@@ -1,4 +1,18 @@
 {% load thumbnail i18n %}
+<style nonce="{{CSP_NONCE}}" type="text/css">
+  .clipboard-form {
+      display: inline;
+  }
+  .disabled-paste-all {
+      color: gray;
+  }
+  .empty-clipboard {
+      color: gray;
+      height: 48px;
+      text-align: center;
+      vertical-align: middle;
+  }
+</style>
 
 {% for clipboard in user.filer_clipboards.all %}
 
@@ -10,23 +24,26 @@
     <tfoot>
         <tr>
             <td colspan="3">
-                <form action="{% url 'admin:filer-paste_clipboard_to_folder' %}" method="post" style="display: inline;">
+                <form action="{% url 'admin:filer-paste_clipboard_to_folder' %}" method="post" class="clipboard-form">
                     {% csrf_token %}
                     <input type="hidden" name="folder_id" value="{{ folder.id }}" />
                     <input type="hidden" name="clipboard_id" value="{{ clipboard.id }}" />
                     <input type="hidden" name="redirect_to" value="{{ current_url }}" />
                     {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
                     {% if select_folder %}<input type="hidden" name="select_folder" value="1" />{% endif %}
-                    <button class="btn btn-default btn-xs" type="submit"{% if folder.is_root or not permissions.has_add_children_permission %} disabled="disabled" style="color: gray;"{% endif %} title="{% trans "Paste all items here" %}">&lArr;</button>
+                    <button class="btn btn-default btn-xs{% if folder.is_root or not permissions.has_add_children_permission %} disabled-paste-all{% endif %}"
+                            type="submit"
+                            {% if folder.is_root or not permissions.has_add_children_permission %}disabled="disabled"{% endif %}
+                            title="{% trans "Paste all items here" %}">&lArr;</button>
                 </form>
-                <form action="{% url 'admin:filer-discard_clipboard' %}" method="post"  style="display: inline;">{% csrf_token %}
+                <form action="{% url 'admin:filer-discard_clipboard' %}" method="post" class="clipboard-form">{% csrf_token %}
                     <input type="hidden" name="clipboard_id" value="{{ clipboard.id }}" />
                     <input type="hidden" name="redirect_to" value="{{ current_url }}" />
                     {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
                     {% if select_folder %}<input type="hidden" name="select_folder" value="1" />{% endif %}
                     <button class="btn btn-default btn-xs" type="submit" title="{% trans "Move all clipboard files to" %} '{% trans "unfiled files" %}' {% trans "folder" %}">{% trans "discard" %}</button>
                 </form>{% comment %}
-                <form action="{% url 'admin:filer-delete_clipboard' %}" method="post"  style="display: inline;">{% csrf_token %}
+                <form action="{% url 'admin:filer-delete_clipboard' %}" method="post" class="clipboard-form">{% csrf_token %}
                     <input type="hidden" name="clipboard_id" value="{{ clipboard.id }}" />
                     <input type="hidden" name="redirect_to" value="{{ current_url }}" />
                     {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
@@ -40,7 +57,7 @@
         {% endwith %}
     {% else %}
         <tr class="noItemsRow">
-            <td colspan="3" style="color: gray;text-align: center; height: 48px; vertical-align: middle;">{% trans "the clipboard is empty" %}</td>
+            <td colspan="3" class="empty-clipboard">{% trans "the clipboard is empty" %}</td>
         </tr>
     {% endif %}
     </tbody>

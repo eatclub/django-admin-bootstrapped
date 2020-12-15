@@ -1,4 +1,9 @@
 {% load i18n static admin_urls admin_modify bootstrapped_goodies_tags %}
+<style nonce="{{CSP_NONCE}}" type="text/css">
+  .tabular-help-text {
+      margin-left: 4px;
+  }
+</style>
 <div class="_inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
   <div class="tabular inline-related {% if forloop.last %}last-related{% endif %}">
 {{ inline_admin_formset.formset.management_form }}
@@ -15,7 +20,7 @@
      {% for field in inline_admin_formset.fields %}
        {% if not field.widget.is_hidden %}
          <th{% if forloop.first %} colspan="2"{% endif %}{% if field.required %} class="required"{% endif %}>{{ field.label|capfirst }}
-         {% if field.help_text %}<i class="glyphicon glyphicon-comment help help-tooltip" style="margin-left: 4px;" alt="({{ field.help_text|striptags }})" title="{{ field.help_text|striptags }}"></i>{% endif %}
+         {% if field.help_text %}<i class="glyphicon glyphicon-comment help help-tooltip tabular-help-text" alt="({{ field.help_text|striptags }})" title="{{ field.help_text|striptags }}"></i>{% endif %}
          </th>
        {% endif %}
      {% endfor %}

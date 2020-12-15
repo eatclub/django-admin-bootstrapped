@@ -41,6 +41,12 @@
     #changelist table thead th:first-child {width: inherit}
 </style>
 {% endif %}
+<style nonce="{{CSP_NONCE}}" type="text/css">
+  .directory-listing-changelink {
+      display: block;
+      float: right;
+  }
+</style>
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -87,7 +93,7 @@
             <span>
                 {% if is_popup %}
                     {% if select_folder and folder.file_type == 'Folder' %}<a class="insertlink insertlinkButton" href="" onclick="opener.dismissRelatedFolderLookupPopup(window, {{ folder.id }}, '{{ folder.pretty_logical_path }}'); return false;" >&nbsp;</a>{% endif %}
-                {% else %}<a style="display: block; float: right;" class="btn btn-default btn-xs changelink" href="{% url 'admin:filer_folder_change' folder.id %}" title="{% trans "Change current folder details" %}">{% trans "Change" %}</a>{% endif %}
+                {% else %}<a class="btn btn-default btn-xs changelink directory-listing-changelink" href="{% url 'admin:filer_folder_change' folder.id %}" title="{% trans "Change current folder details" %}">{% trans "Change" %}</a>{% endif %}
             </span>
         </h1>
         {% else %}{% if folder.is_smart_folder %}

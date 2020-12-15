@@ -1,5 +1,10 @@
 {% load i18n %}
-<div class="form-actions" {% if is_popup %}style="overflow: auto;"{% endif %}>
+<style nonce="{{CSP_NONCE}}" type="text/css">
+  .page-submit-line-form-actions {
+      overflow: auto;
+  }
+</style>
+<div class="form-actions{% if is_popup %} page-submit-line-form-actions{% endif %}">
 
   {% if show_delete_link %}
   	 <a href="delete/" class="btn btn-danger deletelink">{% trans "Delete" %}</a>
